@@ -310,6 +310,8 @@ Caption
 
 Siempre utilizar clamp() para títulos principales.
 
+Todos los títulos (H1, H2, H3, etc.) deben utilizar un peso de fuente Medium (font-medium en Tailwind).
+
 ---
 
 # 8. Colores
@@ -339,6 +341,16 @@ rgba(255,255,255,.08)
 Divider
 
 rgba(255,255,255,.10)
+
+## Alternancia de Secciones
+
+Para evitar que la página se sienta muy oscura, las secciones deben estar intercaladas alternando entre el fondo actual (oscuro) y un fondo más claro. 
+El orden debe ser:
+1. Hero: Fondo oscuro
+2. Siguiente sección: Fondo claro
+3. Siguiente: Fondo oscuro
+4. Siguiente: Fondo claro
+Y así sucesivamente.
 
 ---
 

@@ -223,6 +223,9 @@ Radios
 
 Glow
 
+Las secciones de la página deben alternar entre fondos oscuros y claros (empezando por el hero en oscuro), para evitar que el sitio se sienta demasiado oscuro.
+Todos los títulos (H1-H6) deben usar fuente en peso Medium (font-medium).
+
 No crear estilos diferentes para elementos equivalentes.
 
 ---

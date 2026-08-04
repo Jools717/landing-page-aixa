@@ -189,6 +189,122 @@
         .eco-benefit {
             will-change: transform, opacity;
         }
+
+        /* ========================================= */
+        /* THEME SECTIONS (DARK / LIGHT ALTERNATION) */
+        /* ========================================= */
+        
+        #hero {
+            background: 
+                radial-gradient(circle at 50% 0%, rgba(29, 78, 216, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(96, 165, 250, 0.05) 0%, transparent 50%),
+                linear-gradient(180deg, #020617 0%, #050816 100%);
+        }
+
+        .section-dark {
+            background: linear-gradient(180deg, #0B1120 0%, #050816 50%, #0B1120 100%);
+        }
+
+        .section-light {
+            background-color: #FCFCFD;
+            background-image: 
+                /* Halos de luz principales (blanco puro) */
+                radial-gradient(80% 80% at 15% 10%, #FFFFFF 0%, rgba(255,255,255,0) 100%),
+                radial-gradient(70% 70% at 85% 85%, #FFFFFF 0%, rgba(255,255,255,0) 100%),
+                radial-gradient(50% 50% at 50% 20%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%),
+                /* Variaciones de profundidad casi imperceptibles */
+                radial-gradient(90% 90% at 90% 10%, rgba(248, 250, 252, 0.6) 0%, rgba(248, 250, 252, 0) 100%),
+                radial-gradient(100% 100% at 10% 90%, rgba(245, 247, 250, 0.5) 0%, rgba(245, 247, 250, 0) 100%);
+            color: #334155;
+            position: relative;
+        }
+
+        /* LIGHT THEME TEXT INVERSION (ONLY FOR DIRECT BACKGROUND TEXTS) */
+        
+        /* #que-es-aixa (Left Column Texts) */
+        #que-es-aixa .lg\:col-span-5 h2, 
+        #soluciones .max-w-3xl.mb-16 h2 {
+            color: #0F172A !important;
+        }
+        
+        #que-es-aixa .lg\:col-span-5 p, 
+        #soluciones .max-w-3xl.mb-16 p {
+            color: #475569 !important;
+        }
+        
+        #que-es-aixa .lg\:col-span-5 .from-white, 
+        #soluciones .max-w-3xl.mb-16 .from-white {
+            --tw-gradient-from: #0F172A !important;
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+        }
+        
+        /* Badges on light background */
+        #que-es-aixa .lg\:col-span-5 > div:first-child,
+        #soluciones .max-w-3xl.mb-16 > div:first-child {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+            border-color: rgba(0, 0, 0, 0.1) !important;
+        }
+        #que-es-aixa .lg\:col-span-5 > div:first-child span {
+            color: #1E293B !important;
+        }
+        #soluciones .max-w-3xl.mb-16 > div:first-child span {
+            color: #2563EB !important;
+        }
+        
+        /* Ecosystem diagram lines in #que-es-aixa - High Contrast */
+        #que-es-aixa .eco-line {
+            stroke: #2563EB !important;
+            stroke-width: 2.5px !important;
+            opacity: 0.85;
+            transition: stroke 0.3s ease, stroke-width 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+        }
+        
+        #que-es-aixa .eco-line.highlight {
+            stroke: #1D4ED8 !important;
+            stroke-width: 3.5px !important;
+            opacity: 1 !important;
+            filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.6)) !important;
+        }
+        
+        /* Soluciones Cards - Re-darken */
+        #soluciones .grid > div[id^="card-"] {
+            background-color: #0B1120 !important;
+        }
+        #soluciones .grid > div[id^="card-"]:hover {
+            background-color: #111827 !important;
+            border-color: #2563EB !important; /* Keep the hover primary border */
+        }
+        
+        /* Texto blanco puro dentro de las tarjetas para máxima legibilidad */
+        #que-es-aixa .eco-card span,
+        #que-es-aixa .eco-benefit span,
+        #soluciones .grid > div[id^="card-"] h3,
+        #soluciones .grid > div[id^="card-"] p,
+        #soluciones .grid > div[id^="card-"] span:not([class*="text-indigo"]):not([class*="text-purple"]):not([class*="text-emerald"]) {
+            color: #FFFFFF !important;
+        }
+        
+        #soluciones .grid > div[id^="card-"] .text-indigo-600 {
+            color: #818CF8 !important; /* indigo-400 */
+        }
+        
+        /* Fix bugs in original JS animations that set dark text on dark background */
+        #soluciones .grid > div[id^="card-"] .text-slate-800 {
+            color: #FFFFFF !important; 
+        }
+        
+        /* Enhancing Hover Borders for Ecosystem Diagram on Light Background */
+        #que-es-aixa .eco-card > div:hover {
+            border-color: #3B82F6 !important;
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.4) !important;
+        }
+
+        #eco-aixa-container:hover,
+        #eco-aixa-node:hover > #eco-aixa-container {
+            border-color: #3B82F6 !important;
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.5) !important;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -260,7 +376,7 @@
         <!-- ========================================= -->
         <!-- HERO -->
         <!-- ========================================= -->
-        <section id="hero" class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+        <section id="hero" class="section-dark relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
             <!-- Decorative background elements -->
             <div class="absolute inset-0 z-0 pointer-events-none">
                 <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/20 blur-[120px]">
@@ -284,7 +400,7 @@
 
                         <!-- Title -->
                         <h1
-                            class="text-5xl lg:text-6xl font-bold text-heading leading-[1.1] tracking-tight text-balance">
+                            class="text-5xl lg:text-6xl font-medium text-heading leading-[1.1] tracking-tight text-balance">
                             Automatiza conversaciones con el <span
                                 class="text-transparent bg-clip-text bg-gradient-to-r from-white to-primary-light">conocimiento
                                 de tu empresa.</span>
@@ -358,9 +474,14 @@
         <!-- ========================================= -->
         <!-- QUE ES AIXA -->
         <!-- ========================================= -->
-        <section id="que-es-aixa" class="h-[150vh] md:h-[160vh] relative">
-            <div class="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden bg-background">
-                <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full pt-16 md:pt-20">
+        <section id="que-es-aixa" class="py-16 lg:py-24 relative section-light overflow-hidden">
+            <div class="w-full flex flex-col justify-center bg-transparent">
+                <!-- Decorative background elements -->
+                <div class="absolute inset-0 z-0 pointer-events-none">
+                    <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-white/40 blur-[120px]"></div>
+                    <div class="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] rounded-full bg-white/30 blur-[100px]"></div>
+                </div>
+                <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full pt-16 md:pt-20 relative z-10">
 
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
 
@@ -566,7 +687,7 @@
                             </div>
 
                             <!-- Título -->
-                            <h2 class="text-3xl md:text-5xl font-bold text-heading leading-[1.1] tracking-tight">
+                            <h2 class="text-3xl md:text-5xl font-medium text-heading leading-[1.1] tracking-tight">
                                 Inteligencia Artificial diseñada para <span
                                     class="text-transparent bg-clip-text bg-gradient-to-r from-white to-primary-light">empresas.</span>
                             </h2>
@@ -644,7 +765,7 @@
         <!-- ========================================= -->
         <!-- BENEFICIOS -->
         <!-- ========================================= -->
-        <section id="beneficios" class="py-16 lg:py-24 relative bg-background overflow-hidden">
+        <section id="beneficios" class="section-dark py-16 lg:py-24 relative overflow-hidden">
             <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
 
                 <!-- Header de Sección -->
@@ -656,7 +777,7 @@
                     </div>
 
                     <!-- Título -->
-                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-heading leading-[1.1] tracking-tight">
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-medium text-heading leading-[1.1] tracking-tight">
                         Más productividad.<br>
                         Mayor eficiencia.<br>
                         Mejores <span
@@ -687,7 +808,7 @@
                         </div>
 
                         <h3
-                            class="text-xl font-semibold text-heading group-hover:text-primary-light transition-colors duration-500 mb-8 relative">
+                            class="text-xl font-medium text-heading group-hover:text-primary-light transition-colors duration-500 mb-8 relative">
                             Atención<br>permanente
                             <div
                                 class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-6 h-[2px] bg-primary/30 group-hover:bg-primary group-hover:w-12 transition-all duration-500 rounded-full">
@@ -713,7 +834,7 @@
                         </div>
 
                         <h3
-                            class="text-xl font-semibold text-heading group-hover:text-primary-light transition-colors duration-500 mb-8 relative">
+                            class="text-xl font-medium text-heading group-hover:text-primary-light transition-colors duration-500 mb-8 relative">
                             Optimización<br>del tiempo
                             <div
                                 class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-6 h-[2px] bg-primary/30 group-hover:bg-primary group-hover:w-12 transition-all duration-500 rounded-full">
@@ -739,7 +860,7 @@
                         </div>
 
                         <h3
-                            class="text-xl font-semibold text-heading group-hover:text-primary-light transition-colors duration-500 mb-8 relative">
+                            class="text-xl font-medium text-heading group-hover:text-primary-light transition-colors duration-500 mb-8 relative">
                             Integración<br>&nbsp;
                             <div
                                 class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-6 h-[2px] bg-primary/30 group-hover:bg-primary group-hover:w-12 transition-all duration-500 rounded-full">
@@ -765,7 +886,7 @@
                         </div>
 
                         <h3
-                            class="text-xl font-semibold text-heading group-hover:text-primary-light transition-colors duration-500 mb-8 relative">
+                            class="text-xl font-medium text-heading group-hover:text-primary-light transition-colors duration-500 mb-8 relative">
                             Escalabilidad<br>&nbsp;
                             <div
                                 class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-6 h-[2px] bg-primary/30 group-hover:bg-primary group-hover:w-12 transition-all duration-500 rounded-full">
@@ -785,7 +906,12 @@
         <!-- ========================================= -->
         <!-- SOLUCIONES INTELIGENTES -->
         <!-- ========================================= -->
-        <section id="soluciones" class="py-16 lg:py-24 relative overflow-hidden" style="background:#050816">
+        <section id="soluciones" class="section-light py-16 lg:py-24 relative overflow-hidden">
+            <!-- Decorative background elements -->
+            <div class="absolute inset-0 z-0 pointer-events-none">
+                <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-white/40 blur-[120px]"></div>
+                <div class="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] rounded-full bg-white/30 blur-[100px]"></div>
+            </div>
             <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
 
                 <!-- Título y Subtítulo -->
@@ -797,7 +923,7 @@
                     </div>
 
                     <!-- Título -->
-                    <h2 class="text-3xl md:text-5xl font-bold text-heading leading-[1.15] tracking-tight text-balance">
+                    <h2 class="text-3xl md:text-5xl font-medium text-heading leading-[1.15] tracking-tight text-balance">
                         Soluciones inteligentes para cada proceso de <span
                             class="text-transparent bg-clip-text bg-gradient-to-r from-white to-primary-light">tu
                             empresa.</span>
@@ -821,7 +947,7 @@
                                 class="w-10 h-10 rounded-xl bg-indigo-500/15 flex items-center justify-center text-indigo-400 shrink-0">
                                 <i data-lucide="user" class="w-5 h-5"></i>
                             </div>
-                            <h3 class="text-lg font-bold text-white leading-tight">Ventas Inteligentes</h3>
+                            <h3 class="text-lg font-medium text-white leading-tight">Ventas Inteligentes</h3>
                         </div>
                         <p class="text-sm text-slate-400 leading-relaxed mb-4">Califica clientes potenciales, recomienda
                             productos y acompaña el proceso comercial hasta la conversión.</p>
@@ -937,7 +1063,7 @@
                                 class="w-10 h-10 rounded-xl bg-blue-500/15 flex items-center justify-center text-blue-400 shrink-0">
                                 <i data-lucide="zap" class="w-5 h-5"></i>
                             </div>
-                            <h3 class="text-lg font-bold text-white leading-tight">Automatización de Procesos</h3>
+                            <h3 class="text-lg font-medium text-white leading-tight">Automatización de Procesos</h3>
                         </div>
                         <p class="text-sm text-slate-400 leading-relaxed mb-4">Reduce tareas repetitivas mediante flujos
                             automatizados e integración con tus sistemas.</p>
@@ -1050,7 +1176,7 @@
                                 class="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center text-emerald-400 shrink-0">
                                 <i data-lucide="book-open" class="w-5 h-5"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-white leading-tight">Gestión del Conocimiento</h3>
+                            <h3 class="text-xl font-medium text-white leading-tight">Gestión del Conocimiento</h3>
                         </div>
                         <p class="text-sm text-slate-400 leading-relaxed mb-4 max-w-md relative z-10">Consulta
                             documentos, indicadores, inventarios, pedidos y bases de datos mediante lenguaje natural.
@@ -1176,7 +1302,7 @@
                                 class="relative mt-3 w-full bg-emerald-500/10 border border-emerald-500/25 rounded-2xl p-4 flex justify-between items-center opacity-0 translate-y-4 transition-all duration-500 shadow-md shadow-emerald-500/10 z-20">
                                 <div class="flex flex-col gap-4">
                                     <div class="flex items-center gap-3">
-                                        <h4 class="text-lg font-black text-white leading-none">Pedido #4587</h4>
+                                        <h4 class="text-lg font-medium text-white leading-none">Pedido #4587</h4>
                                         <span
                                             class="px-2.5 py-1 bg-emerald-500/20 text-emerald-300 rounded-full text-[10px] font-bold uppercase tracking-wider">Encontrado</span>
                                     </div>
@@ -1219,7 +1345,7 @@
                                 class="w-10 h-10 rounded-xl bg-amber-500/15 flex items-center justify-center text-amber-400 shrink-0">
                                 <i data-lucide="file-search" class="w-5 h-5"></i>
                             </div>
-                            <h3 class="text-lg font-bold text-white leading-tight">Soporte Interno</h3>
+                            <h3 class="text-lg font-medium text-white leading-tight">Soporte Interno</h3>
                         </div>
                         <p class="text-sm text-slate-400 leading-relaxed mb-2">Facilita el acceso a procedimientos,
                             documentos y políticas para los colaboradores.</p>
@@ -1317,7 +1443,7 @@
                                 class="w-10 h-10 rounded-xl bg-purple-500/15 flex items-center justify-center text-purple-400 shrink-0">
                                 <i data-lucide="calendar" class="w-5 h-5"></i>
                             </div>
-                            <h3 class="text-lg font-bold text-white leading-tight">Agenda Inteligente</h3>
+                            <h3 class="text-lg font-medium text-white leading-tight">Agenda Inteligente</h3>
                         </div>
                         <p class="text-sm text-slate-400 leading-relaxed mb-2">Programa citas, reuniones y recordatorios
                             de forma automática.</p>
@@ -1455,7 +1581,7 @@
                                 class="w-10 h-10 rounded-xl bg-teal-500/15 flex items-center justify-center text-teal-400 shrink-0">
                                 <i data-lucide="headphones" class="w-5 h-5"></i>
                             </div>
-                            <h3 class="text-lg font-bold text-white leading-tight">Atención al Cliente</h3>
+                            <h3 class="text-lg font-medium text-white leading-tight">Atención al Cliente</h3>
                         </div>
                         <p class="text-sm text-slate-400 leading-relaxed mb-2 max-w-md">Responde consultas de manera
                             inmediata, brinda información y mejora la experiencia del usuario las 24 horas del día.</p>
@@ -1598,7 +1724,7 @@
         <!-- ========================================= -->
         <!-- NUESTRO DIFERENCIAL -->
         <!-- ========================================= -->
-        <section id="diferencial" class="py-24 lg:py-32 relative bg-background overflow-hidden">
+        <section id="diferencial" class="section-dark py-24 lg:py-32 relative overflow-hidden">
             <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
 
                 <!-- Header de Sección -->
@@ -1612,7 +1738,7 @@
                     </div>
 
                     <!-- Título -->
-                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-heading leading-[1.1] tracking-tight">
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-medium text-heading leading-[1.1] tracking-tight">
                         Servicio <span
                             class="text-transparent bg-clip-text bg-gradient-to-r from-white to-primary-light">Boutique.</span>
                     </h2>
@@ -1648,7 +1774,7 @@
                                 class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
                                 <i data-lucide="x" class="w-5 h-5 text-slate-500"></i>
                             </div>
-                            <h3 class="text-xl md:text-2xl font-bold text-slate-300">Soluciones genéricas</h3>
+                            <h3 class="text-xl md:text-2xl font-medium text-slate-300">Soluciones genéricas</h3>
                         </div>
 
                         <div class="flex flex-col gap-0 divide-y divide-white/5">
@@ -1707,7 +1833,7 @@
                                 class="w-12 h-12 rounded-full bg-primary-light border border-primary-light flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(96,165,250,0.5)]">
                                 <i data-lucide="check" class="w-6 h-6 text-white stroke-[3]"></i>
                             </div>
-                            <h3 class="text-xl md:text-2xl font-bold text-white">AIXA</h3>
+                            <h3 class="text-xl md:text-2xl font-medium text-white">AIXA</h3>
                         </div>
 
                         <div class="flex flex-col relative">
@@ -1852,7 +1978,12 @@
         <!-- ========================================= -->
         <!-- CTA BLOCK -->
         <!-- ========================================= -->
-        <section id="cta">
+        <section id="cta" class="section-light py-20 lg:py-32 relative overflow-hidden">
+            <!-- Decorative background elements -->
+            <div class="absolute inset-0 z-0 pointer-events-none">
+                <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-white/40 blur-[120px]"></div>
+                <div class="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] rounded-full bg-white/30 blur-[100px]"></div>
+            </div>
             <!-- Component: CTA Block -->
         </section>
 
@@ -2546,25 +2677,37 @@
                 });
             }
 
-            window.addEventListener('scroll', () => {
-                if (hasCompleted) return;
+            let hasStarted = false;
 
-                const rect = section.getBoundingClientRect();
-                const maxScroll = rect.height - window.innerHeight;
-                let scrollY = -rect.top;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !hasStarted) {
+                        hasStarted = true;
+                        observer.disconnect();
+                        playEcosystemAnimation();
+                    }
+                });
+            }, { threshold: 0.2 });
 
-                if (scrollY < 0) scrollY = 0;
-                if (scrollY > maxScroll) scrollY = maxScroll;
+            observer.observe(section);
 
-                let progress = maxScroll > 0 ? scrollY / maxScroll : 1;
+            function playEcosystemAnimation() {
+                const duration = 3500; // 3.5s smooth time-based animation
+                const startTime = performance.now();
 
-                if (progress >= 0.95) {
-                    progress = 1;
-                    hasCompleted = true; // Lock the animation completed
+                function animate(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    let progress = Math.min(elapsed / duration, 1);
+
+                    updateEcosystem(progress);
+
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    }
                 }
 
-                updateEcosystem(progress);
-            });
+                requestAnimationFrame(animate);
+            }
 
             function updateEcosystem(p) {
                 const lineIdsOrdered = [
@@ -2588,13 +2731,13 @@
                     card.style.filter = `blur(${(1 - pCards) * 8}px)`;
                 });
 
-                // 2. Lines (0.25 to 0.70): Sequential Line Connections (One by One)
+                // 2. Lines (0.25 to 0.75): Sequential Line Connections (One by One)
                 const startP = 0.25;
-                const endP = 0.70;
+                const endP = 0.75;
                 const totalWindow = endP - startP;
                 const itemCount = lineIdsOrdered.length; // 8
                 const lineDuration = 0.10; // Duration per line
-                const step = (totalWindow - lineDuration) / (itemCount - 1); // 0.05 step
+                const step = (totalWindow - lineDuration) / (itemCount - 1);
 
                 lineIdsOrdered.forEach((id, index) => {
                     const line = document.getElementById(id);
@@ -2623,8 +2766,8 @@
                     }
                 });
 
-                // 3. AIXA Node (0.50 to 0.75): Activate progressively as lines arrive
-                let pAixa = Math.min(Math.max((p - 0.50) / 0.25, 0), 1);
+                // 3. AIXA Node (0.50 to 0.80): Activate progressively as lines arrive
+                let pAixa = Math.min(Math.max((p - 0.50) / 0.30, 0), 1);
                 aixaIcon.style.opacity = 0.5 + 0.5 * pAixa;
 
                 let currentGlow = pAixa * 0.8;
@@ -2642,8 +2785,8 @@
                     aixaIcon.classList.add('text-primary');
                 }
 
-                // 4. Benefits (0.75 to 1.0): Fade in bottom cards
-                let pBen = Math.min(Math.max((p - 0.75) / 0.25, 0), 1);
+                // 4. Benefits (0.75 to 0.95): Fade in bottom cards smoothly
+                let pBen = Math.min(Math.max((p - 0.75) / 0.20, 0), 1);
                 benefits.forEach((ben, i) => {
                     let benP = Math.min(Math.max((pBen - i * 0.15) / 0.7, 0), 1);
                     ben.style.opacity = benP;
