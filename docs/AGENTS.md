@@ -109,7 +109,10 @@ Todo el CSS personalizado deberá escribirse exclusivamente dentro de:
 
 </style>
 
-No utilizar atributos style="" inline.
+No utilizar atributos `style=""` inline para aplicar estilos visuales estáticos.
+Todos los estilos estáticos deben asignarse mediante clases de Tailwind CSS o dentro del bloque `<style>`.
+
+**Excepción:** Los atributos `style=""` están permitidos **únicamente** para propiedades de diagramación, posicionamiento dinámico (coordenadas en diagramas) o variables dinámicas manejadas por JavaScript (ej: `--dx`, `top`, `left`).
 
 No sobrescribir clases de Tailwind salvo cuando sea estrictamente necesario.
 
