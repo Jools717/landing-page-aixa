@@ -1,0 +1,907 @@
+        /* ========================================= */
+        /* LOCAL FONTS */
+        /* ========================================= */
+        @font-face {
+            font-family: 'Fredoka';
+            src: url('media/fonts/Fredoka-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Fredoka';
+            src: url('media/fonts/Fredoka-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Fredoka';
+            src: url('media/fonts/Fredoka-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Fredoka';
+            src: url('media/fonts/Fredoka-SemiBold.ttf') format('truetype');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Fredoka';
+            src: url('media/fonts/Fredoka-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* ========================================= */
+        /* BASE STYLES & ROOT DESIGN TOKENS */
+        /* ========================================= */
+        :root {
+            /* Brand Identity Colors (Imposing Royal Electric Cobalt) */
+            --color-primary: #002069;
+            --color-primary-hover: #093CB8;
+            --color-primary-light: #3B82F6;
+            --color-primary-glow: rgba(13, 80, 232, 0.45);
+
+            /* Dark Surfaces */
+            --color-bg-dark: #050816;
+            --color-bg-surface: #0B1120;
+            --color-bg-card: #0B0F19;
+
+            /* Light Unified Canvas */
+            --color-bg-light: #FAFAFC;
+
+            /* Typography Colors */
+            --color-text-heading: #FFFFFF;
+            --color-text-body: #CBD5E1;
+            --color-text-muted: #94A3B8;
+            --color-text-dark: #0F172A;
+            --color-text-dark-muted: #475569;
+
+            /* Glassmorphism & Borders */
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-color-card: rgba(30, 41, 59, 0.85);
+            --divider-color: rgba(255, 255, 255, 0.10);
+
+            /* Interactive Flashlight Coordinates */
+            --mouse-x: -999px;
+            --mouse-y: -999px;
+            --flashlight-opacity: 0;
+        }
+
+        body {
+            background-color: var(--color-bg-dark);
+            color: var(--color-text-body);
+            font-family: 'Fredoka', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========================================= */
+        /* CUSTOM UTILITIES */
+        /* ========================================= */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+        }
+
+        .bg-whatsapp-mockup {
+            background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
+            background-color: #0b141a;
+            background-blend-mode: overlay;
+            background-size: cover;
+        }
+
+        .scrollbar-custom {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+        }
+
+        /* ========================================= */
+        /* ANIMATIONS */
+        /* ========================================= */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+            color: #60A5FA;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .fade-enter {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .fade-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-exit {
+            opacity: 1;
+            transition: opacity 0.5s ease-in;
+        }
+
+        .fade-exit-active {
+            opacity: 0;
+        }
+
+        /* ========================================= */
+        /* QUE ES AIXA ANIMATIONS */
+        /* ========================================= */
+        .eco-line {
+            stroke-dasharray: 1;
+            stroke-dashoffset: 1;
+            /* Se anima vía JavaScript con requestAnimationFrame / scroll event */
+            transition: stroke 0.3s ease, stroke-width 0.3s ease, filter 0.3s ease;
+        }
+
+        .eco-line.highlight {
+            stroke: #60A5FA !important;
+            stroke-width: 3px !important;
+            filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.8));
+        }
+
+        .eco-card {
+            will-change: transform, opacity, filter;
+        }
+
+        .eco-benefit {
+            will-change: transform, opacity;
+        }
+
+        /* ========================================= */
+        /* THEME SECTIONS (DARK / LIGHT ALTERNATION) */
+        /* ========================================= */
+
+        #hero {
+            background:
+                radial-gradient(circle at 50% 0%, rgba(29, 78, 216, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(96, 165, 250, 0.05) 0%, transparent 50%),
+                linear-gradient(180deg, #020617 0%, #050816 100%);
+        }
+
+        .section-dark {
+            background: linear-gradient(180deg, #0B1120 0%, #050816 50%, #0B1120 100%);
+        }
+
+        .section-light {
+            background-color: #FCFCFD;
+            background-image:
+                /* Halos de luz principales (blanco puro) */
+                radial-gradient(80% 80% at 15% 10%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%),
+                radial-gradient(70% 70% at 85% 85%, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%),
+                radial-gradient(50% 50% at 50% 20%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%),
+                /* Variaciones de profundidad casi imperceptibles */
+                radial-gradient(90% 90% at 90% 10%, rgba(248, 250, 252, 0.6) 0%, rgba(248, 250, 252, 0) 100%),
+                radial-gradient(100% 100% at 10% 90%, rgba(245, 247, 250, 0.5) 0%, rgba(245, 247, 250, 0) 100%);
+            color: #334155;
+            position: relative;
+        }
+
+        /* LIGHT THEME TEXT INVERSION (ONLY FOR DIRECT BACKGROUND TEXTS) */
+
+        /* #que-es-aixa & #soluciones Light Theme Text Inversion */
+        #que-es-aixa h2,
+        #soluciones h2 {
+            color: #0F172A !important;
+        }
+
+        #que-es-aixa p,
+        #soluciones p {
+            color: #475569 !important;
+        }
+
+        #que-es-aixa .from-white,
+        #soluciones .from-white {
+            --tw-gradient-from: #0F172A !important;
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+        }
+
+        /* Badges on light background */
+        #que-es-aixa .inline-flex.glass,
+        #soluciones .inline-flex.glass {
+            background-color: rgba(13, 80, 232, 0.08) !important;
+            border-color: rgba(13, 80, 232, 0.2) !important;
+        }
+
+        #que-es-aixa .inline-flex.glass span,
+        #soluciones .inline-flex.glass span {
+            color: #0D50E8 !important;
+        }
+
+        /* Ecosystem diagram lines in #que-es-aixa - High Contrast */
+        #que-es-aixa .eco-line {
+            stroke: #0D50E8 !important;
+            stroke-width: 2.5px !important;
+            opacity: 0.85;
+            transition: stroke 0.3s ease, stroke-width 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+        }
+
+        #que-es-aixa .eco-line.highlight {
+            stroke: #093CB8 !important;
+            stroke-width: 3.5px !important;
+            opacity: 1 !important;
+            filter: drop-shadow(0 0 10px rgba(13, 80, 232, 0.6)) !important;
+        }
+
+        /* ========================================= */
+        /* UNIFIED LIGHT SMOOTH BACKGROUND & SHOWCASE STYLES */
+        /* ========================================= */
+        .aixa-grid-bg-light,
+        .soluciones-grid-bg-light {
+            background-color: #FAFAFC;
+            background-image: none;
+        }
+
+        /* ========================================= */
+        /* BACKGROUND FLASHLIGHT (ESTRICTAMENTE EN EL FONDO BASE: Z-INDEX -1) */
+        /* ========================================= */
+        /* En Fondos Oscuros (Hero, Diferencial, Footer) */
+        .section-dark,
+        .aixa-footer,
+        .aixa-footer-modern {
+            position: relative;
+            isolation: isolate;
+        }
+
+        .section-dark::before,
+        .aixa-footer::before,
+        .aixa-footer-modern::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: var(--flashlight-opacity, 0);
+            transition: opacity 0.35s ease;
+            background-image: radial-gradient(360px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+                    rgba(13, 80, 232, 0.22) 0%,
+                    rgba(59, 130, 246, 0.10) 40%,
+                    rgba(30, 58, 138, 0.03) 70%,
+                    transparent 85%);
+            background-attachment: fixed;
+        }
+
+        /* En Fondos Claros (¿Qué es AIXA?, Beneficios, Soluciones, CTA, Integraciones) */
+        .aixa-grid-bg-light,
+        .section-light,
+        .aixa-light-canvas-bottom {
+            position: relative;
+            isolation: isolate;
+        }
+
+        .aixa-grid-bg-light::before,
+        .aixa-light-canvas-bottom::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: var(--flashlight-opacity, 0);
+            transition: opacity 0.35s ease;
+            background-image: radial-gradient(350px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+                    rgba(37, 99, 235, 0.28) 0%,
+                    rgba(59, 130, 246, 0.16) 40%,
+                    rgba(147, 197, 253, 0.06) 70%,
+                    transparent 85%);
+            background-attachment: fixed;
+        }
+
+        /* ========================================= */
+        /* HOVER GLOW BORDER EFFECT */
+        /* ========================================= */
+        .card-glow-hover {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+
+        .card-glow-hover:hover {
+            border-color: #0D50E8 !important;
+            box-shadow: 0 0 28px rgba(13, 80, 232, 0.45), 0 15px 30px -10px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        /* ========================================= */
+        /* UNIFIED GLOW HOVER EFFECT ON ALL BUTTONS */
+        /* ========================================= */
+        .btn-primary-aixa {
+            background: linear-gradient(135deg, #0D50E8 0%, #1D4ED8 100%) !important;
+            border: 1px solid rgba(147, 197, 253, 0.35) !important;
+            box-shadow: 0 4px 20px rgba(13, 80, 232, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .btn-primary-aixa::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.75s ease;
+        }
+
+        .btn-primary-aixa:hover {
+            transform: translateY(-2px) scale(1.02);
+            border-color: #60A5FA !important;
+            box-shadow: 0 0 32px rgba(13, 80, 232, 0.65), 0 0 12px rgba(96, 165, 250, 0.5), 0 8px 25px -4px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .btn-primary-aixa:hover::after {
+            left: 140%;
+        }
+
+        .btn-secondary-aixa {
+            background: rgba(255, 255, 255, 0.05) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15) !important;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .btn-secondary-aixa::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transform: skewX(-20deg);
+            transition: left 0.75s ease;
+        }
+
+        .btn-secondary-aixa:hover {
+            transform: translateY(-2px) scale(1.02);
+            background: rgba(255, 255, 255, 0.09) !important;
+            border-color: #60A5FA !important;
+            box-shadow: 0 0 32px rgba(13, 80, 232, 0.65), 0 0 12px rgba(96, 165, 250, 0.5), 0 8px 25px -4px rgba(0, 0, 0, 0.5) !important;
+            color: #FFFFFF !important;
+        }
+
+        .btn-secondary-aixa:hover::after {
+            left: 140%;
+        }
+
+        /* Navbar CTA Button with Continuous Moving Border Animation */
+        .btn-nav-moving-border {
+            position: relative;
+            padding: 1.5px;
+            border-radius: 0.75rem;
+            /* rounded-xl */
+            overflow: hidden;
+            display: inline-flex;
+            background: transparent;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+        }
+
+        .btn-nav-moving-border::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg,
+                    transparent 0deg,
+                    transparent 140deg,
+                    rgba(59, 130, 246, 0.4) 180deg,
+                    #3B82F6 220deg,
+                    #60A5FA 270deg,
+                    #93C5FD 300deg,
+                    rgba(59, 130, 246, 0.4) 330deg,
+                    transparent 360deg);
+            animation: rotateMovingBorder 3s linear infinite;
+            will-change: transform;
+            transform: translate3d(0, 0, 0);
+            z-index: 0;
+        }
+
+        .btn-nav-moving-border-inner {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 0.625rem 1.5rem;
+            border-radius: calc(0.75rem - 1.5px);
+            background: rgba(3, 7, 18, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-nav-moving-border:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 0 32px rgba(13, 80, 232, 0.65), 0 0 12px rgba(96, 165, 250, 0.5), 0 8px 25px -4px rgba(0, 0, 0, 0.6) !important;
+        }
+
+        .btn-nav-moving-border:hover .btn-nav-moving-border-inner {
+            background: rgba(8, 18, 42, 0.94);
+            color: #FFFFFF;
+        }
+
+        @keyframes rotateMovingBorder {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .soluciones-card-perspective {
+            perspective: 1200px;
+            transform-style: preserve-3d;
+        }
+
+        /* Base Card Styling */
+        .sol-deck-card {
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            width: 100%;
+            max-width: 24rem;
+            /* max-w-sm */
+            height: 460px;
+            border-radius: 1.5rem;
+            /* rounded-3xl */
+            overflow: hidden;
+            background: #0b141a;
+            border: 1px solid rgba(51, 65, 85, 0.7);
+            font-family: inherit;
+            will-change: transform, z-index, opacity;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+
+        /* State: Active Front Card */
+        .sol-deck-card.is-front {
+            z-index: 20;
+            transform: rotate(-1.5deg) scale(1) translateY(0);
+            box-shadow: 0 25px 60px rgba(15, 23, 42, 0.28);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .sol-deck-card.is-front:hover {
+            transform: rotate(0deg) scale(1.01) translateY(-4px);
+        }
+
+        /* State: Stacked Back Card */
+        .sol-deck-card.is-back {
+            z-index: 10;
+            transform: rotate(3deg) scale(0.96) translateY(-8px);
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.2);
+            opacity: 0.95;
+            pointer-events: none;
+        }
+
+        /* Genuine Card Swap Animation Keyframes */
+        @keyframes frontCardToBackRight {
+            0% {
+                transform: rotate(-1.5deg) scale(1) translate3d(0, 0, 0);
+                z-index: 25;
+                opacity: 1;
+            }
+
+            45% {
+                transform: rotate(18deg) scale(1.04) translate3d(180px, -25px, 20px);
+                z-index: 25;
+                opacity: 1;
+            }
+
+            50% {
+                /* Drop behind the back card as it passes */
+                z-index: 8;
+            }
+
+            100% {
+                transform: rotate(3deg) scale(0.96) translate3d(0, -8px, 0);
+                z-index: 10;
+                opacity: 0.95;
+            }
+        }
+
+        @keyframes frontCardToBackLeft {
+            0% {
+                transform: rotate(-1.5deg) scale(1) translate3d(0, 0, 0);
+                z-index: 25;
+                opacity: 1;
+            }
+
+            45% {
+                transform: rotate(-18deg) scale(1.04) translate3d(-180px, -25px, 20px);
+                z-index: 25;
+                opacity: 1;
+            }
+
+            50% {
+                z-index: 8;
+            }
+
+            100% {
+                transform: rotate(3deg) scale(0.96) translate3d(0, -8px, 0);
+                z-index: 10;
+                opacity: 0.95;
+            }
+        }
+
+        @keyframes backCardToFront {
+            0% {
+                transform: rotate(3deg) scale(0.96) translate3d(0, -8px, 0);
+                z-index: 10;
+                opacity: 0.95;
+            }
+
+            35% {
+                transform: rotate(0.5deg) scale(0.98) translate3d(-8px, -4px, 0);
+                z-index: 15;
+                opacity: 1;
+            }
+
+            100% {
+                transform: rotate(-1.5deg) scale(1) translate3d(0, 0, 0);
+                z-index: 20;
+                opacity: 1;
+            }
+        }
+
+        .anim-front-to-back-right {
+            animation: frontCardToBackRight 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .anim-front-to-back-left {
+            animation: frontCardToBackLeft 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .anim-back-to-front {
+            animation: backCardToFront 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .soluciones-nav-btn {
+            width: 3.25rem;
+            height: 3.25rem;
+            border-radius: 9999px;
+            background: #0B1120;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .soluciones-nav-btn:hover {
+            transform: translateY(-2px) scale(1.08);
+            border-color: #60A5FA !important;
+            box-shadow: 0 0 32px rgba(13, 80, 232, 0.65), 0 0 12px rgba(96, 165, 250, 0.5), 0 8px 25px -4px rgba(0, 0, 0, 0.5) !important;
+            background: #0D50E8 !important;
+            color: #FFFFFF !important;
+        }
+
+        .soluciones-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .soluciones-tab-btn {
+            background-color: #FFFFFF;
+            color: #475569;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease;
+        }
+
+        .soluciones-tab-btn:hover {
+            color: #0F172A;
+            border-color: #CBD5E1;
+            background-color: #F8FAFC;
+        }
+
+        .soluciones-tab-btn.active {
+            color: #FFFFFF !important;
+            font-weight: 600;
+        }
+
+        /* Enhancing Hover Borders for Ecosystem Diagram on Light Background */
+        #que-es-aixa .eco-card>div:hover {
+            border-color: #3B82F6 !important;
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.4) !important;
+        }
+
+        #eco-aixa-container:hover,
+        #eco-aixa-node:hover>#eco-aixa-container {
+            border-color: #3B82F6 !important;
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.5) !important;
+            cursor: pointer;
+        }
+
+        /* =========================================================
+           AIXA FOOTER (MODERN MINIMALIST)
+           ========================================================= */
+        .aixa-footer-modern {
+            position: relative;
+            background-color: #050816;
+            color: #94A3B8;
+            padding: 56px 0 48px;
+            z-index: 10;
+        }
+
+        .aixa-footer-modern a {
+            text-decoration: none;
+        }
+
+        .aixa-footer-social-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #CBD5E1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .aixa-footer-social-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        .aixa-footer-social-btn:hover {
+            background: rgba(13, 80, 232, 0.25);
+            border-color: #60A5FA;
+            color: #FFFFFF;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 20px rgba(13, 80, 232, 0.5), 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .aixa-footer-nav-link {
+            color: #94A3B8;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.25s ease, transform 0.25s ease;
+        }
+
+        .aixa-footer-nav-link:hover {
+            color: #FFFFFF;
+        }
+
+        /* ========================================= */
+        /* LIGHT CANVAS BOTTOM BLOCK (CTA + INTEGRACIONES) */
+        /* ========================================= */
+        .aixa-light-canvas-bottom {
+            background-color: #FAFAFC;
+            border-bottom-left-radius: 44px;
+            border-bottom-right-radius: 44px;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.35);
+            position: relative;
+            z-index: 20;
+            border: none;
+            outline: none;
+        }
+
+        @media (min-width: 768px) {
+            .aixa-light-canvas-bottom {
+                border-bottom-left-radius: 64px;
+                border-bottom-right-radius: 64px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .aixa-light-canvas-bottom {
+                border-bottom-left-radius: 76px;
+                border-bottom-right-radius: 76px;
+            }
+        }
+
+        #integraciones {
+            background: transparent;
+            position: relative;
+            z-index: 20;
+            border: none;
+            outline: none;
+        }
+
+        .integ-orbit-ring {
+            width: min(88vw, 620px);
+            height: min(88vw, 620px);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 1.5px dashed rgba(59, 130, 246, 0.28);
+            box-shadow: 0 0 60px rgba(59, 130, 246, 0.06), inset 0 0 60px rgba(59, 130, 246, 0.04);
+        }
+
+        .integ-orbit-ring-inner {
+            width: min(55vw, 380px);
+            height: min(55vw, 380px);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(59, 130, 246, 0.12);
+        }
+
+        #integ-center-core {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0.35);
+            opacity: 0;
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s ease, box-shadow 0.9s ease;
+            box-shadow: 0 20px 50px rgba(13, 80, 232, 0.12), 0 4px 16px rgba(0, 0, 0, 0.04);
+            border: 1.5px solid rgba(191, 219, 254, 0.9);
+        }
+
+        #integ-center-core.is-active {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .integ-neon-glow {
+            animation: aixaNeonPulseLight 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes aixaNeonPulseLight {
+            0% {
+                filter: drop-shadow(0 2px 10px rgba(13, 80, 232, 0.3));
+                transform: scale(1);
+            }
+            100% {
+                filter: drop-shadow(0 6px 22px rgba(13, 80, 232, 0.55));
+                transform: scale(1.03);
+            }
+        }
+
+        /* Integration Item Cards (Full-Bleed Squircle with Hover Name Tooltip) */
+        .integ-card {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 114px;
+            height: 114px;
+            border-radius: 28px;
+            background: #0B0F19;
+            border: 2px solid #E2E8F0;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.10), 0 4px 12px rgba(15, 23, 42, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            overflow: visible;
+            cursor: pointer;
+            pointer-events: auto;
+            will-change: transform, opacity, filter;
+            transform-origin: center center;
+            opacity: 0;
+            transform: translate(calc(-50% + 750px), -50%) scale(0.6);
+            transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .integ-card {
+                width: 136px;
+                height: 136px;
+                border-radius: 32px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .integ-card {
+                width: 86px;
+                height: 86px;
+                border-radius: 20px;
+            }
+        }
+
+        .integ-card-img-wrapper {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: inherit;
+            background: #0B0F19;
+        }
+
+        .integ-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Hover Name Tooltip */
+        .integ-card-tooltip {
+            position: absolute;
+            bottom: -36px;
+            left: 50%;
+            transform: translateX(-50%) translateY(6px);
+            white-space: nowrap;
+            background: rgba(11, 17, 32, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.45);
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+            z-index: 70;
+        }
+
+        @media (max-width: 640px) {
+            .integ-card-tooltip {
+                font-size: 9.5px;
+                bottom: -28px;
+                padding: 3px 8px;
+            }
+        }
+
+        .integ-card:hover .integ-card-tooltip {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .integ-card:hover {
+            border-color: #0D50E8 !important;
+            box-shadow: 0 0 35px rgba(13, 80, 232, 0.4), 0 20px 45px -10px rgba(15, 23, 42, 0.25) !important;
+            z-index: 60 !important;
+            transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.15) !important;
+        }
+
+        .integ-card:hover img {
+            transform: scale(1.1);
+        }
