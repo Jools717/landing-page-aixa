@@ -76,6 +76,7 @@ langin-page-aixa/
   - Lógica de la linterna interactiva (`--mouse-x`, `--mouse-y`, `--flashlight-opacity`).
   - Estilos de tarjetas complejas (`sol-deck-card`, `integ-card`, `btn-nav-moving-border`).
 - **Consistencia en Hover:** Toda tarjeta o botón interactivo debe contar con transiciones suaves (`cubic-bezier(0.16, 1, 0.3, 1)` o `ease-out`).
+- **Consolidación de Media Queries:** Todas las reglas responsive `@media` (`640px`, `768px`, `1024px`, etc.) deben ubicarse de forma consolidada y ordenada al final de `styles.css` en bloques dedicados por breakpoint, en lugar de dispersarse entre secciones o componentes individuales.
 
 ---
 
