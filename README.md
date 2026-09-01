@@ -96,4 +96,4 @@ El sistema de diseño únicamente garantiza consistencia, reutilización y calid
 - Excelente rendimiento.
 - Accesibilidad.
 - SEO.
-- Alta mantenibilidad.
+- Alta mantenibilidad.# practica-git-actions
