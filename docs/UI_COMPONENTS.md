@@ -1,395 +1,170 @@
 # UI COMPONENTS
 
-# Prioridad de instrucciones
+# Catálogo Oficial de Componentes UI
 
-Este documento define el catálogo oficial de componentes reutilizables del proyecto.
+**Proyecto:** AIXA Landing Page  
+**Versión:** 2.0  
+**Librería de Iconos:** Lucide Icons  
+**Tipografía:** Fredoka (Local)
 
-Las referencias visuales podrán modificar su apariencia.
-
-Su estructura, comportamiento y reutilización deberán mantenerse consistentes.
-
-No crear variantes innecesarias.
-
----
-
-# Reglas generales
-
-Todo componente debe ser:
-
-Reutilizable.
-
-Responsivo.
-
-Accesible.
-
-Consistente.
-
-Fácil de mantener.
-
-No duplicar componentes.
-
-Si uno existente puede adaptarse, reutilizarlo.
+Este documento describe la estructura, clases, estados y comportamiento de todos los componentes implementados en la landing page de AIXA.
 
 ---
 
-# Navbar
+# 1. Navbar (`#main-nav`)
 
-## Objetivo
+Barra de navegación fija superior con soporte de scroll dinámico y menú adaptativo.
 
-Permitir navegación.
+### Elementos:
+- **Logo AIXA:** `media/images/aixa_logo_web.svg` con altura responsive (`h-14 md:h-16`).
+- **Navegación Desktop:** Enlaces a secciones (`#que-es-aixa`, `#beneficios`, `#soluciones`, `#diferencial`, `#integraciones`) con transición de color `text-body hover:text-white`.
+- **CTA Moving Border:** Botón con animación de borde cónico rotativo.
+- **Botón Menú Móvil:** Icono Lucide `menu` / `x`.
+- **Menú Desplegable Móvil (`#mobile-menu`):** Panel glassmorphic con fondo `bg-surface/95` y enlaces apilados.
 
-Guiar al usuario.
-
-Mantener visible el CTA principal.
-
-## Elementos
-
-Logo
-
-Links
-
-CTA
-
-Menú móvil
-
-## Estados
-
-Default
-
-Sticky
-
-Mobile
-
-Desktop
+### Estados:
+- **Default:** Fondo transparente.
+- **Scrolled (`.is-scrolled`):** Fondo con glassmorphism oscuro y borde inferior sutil (`border-white/10`).
 
 ---
 
-# Hero
+# 2. Hero Section (`#hero`)
 
-## Elementos
+Sección de impacto inicial de pantalla completa que combina propuesta de valor corporativa con demostrador interactivo de chat.
 
-Eyebrow (opcional)
-
-Título
-
-Descripción
-
-Botones
-
-Elemento visual
-
-## Reglas
-
-Solo un H1.
-
-Máximo dos CTAs.
-
-El CTA principal debe destacar claramente.
+### Elementos:
+- **Badge:** Píldora glassmorphic con pulso verde/azul (`IA Empresarial Avanzada`).
+- **Título H1:** Texto en peso Medium (`font-medium`) con degradado `bg-clip-text` (`Automatiza conversaciones con el conocimiento de tu empresa`).
+- **Subtítulo:** Texto legible `text-body text-lg lg:text-xl`.
+- **Acciones Duales:**
+  - Botón primario de WhatsApp (`.btn-primary-aixa`).
+  - Botón secundario de anclaje (`.btn-secondary-aixa`).
+- **WhatsApp Live Chat Widget:**
+  - Encabezado simulador de WhatsApp Dark (`#202c33`), avatar AIXA y estado de cuenta verificada.
+  - Contenedor de mensajes (`#demo-body`) con simulación de mecanografiado (`.typing-cursor`) e inyección dinámica.
+  - Contenedor de chips interactivos (`#demo-chips`) con preguntas predeterminadas.
 
 ---
 
-# Badge
+# 3. ¿Qué es AIXA? — Ecosistema Interactivo (`#que-es-aixa`)
 
-## Uso
+Visualizador interactivo de integración de fuentes de datos sobre lienzo claro continuo.
 
-Etiquetas.
-
-Categorías.
-
-Destacados.
-
-## Estados
-
-Default
-
-Hover
+### Elementos:
+- **Core AIXA Central (`#eco-aixa-node`):** Nodo circular central con resplandor pulsante y tipografía AIXA.
+- **Líneas Conectoras SVG (`.eco-line`):** Trazados curvos de alta visibilidad en azul cobalto (`#0D50E8`) que se iluminan al interactuar con las tarjetas.
+- **Nodos de Datos (`.eco-card`):** 8 tarjetas perimetrales conectadas:
+  - *Izquierda:* Documentos, Bases de datos, Inventario, Correos.
+  - *Derecha:* CRM, ERP, APIs, Otras fuentes.
+- **Resumen de Beneficios Inferior (`.eco-benefit`):** Grid de 3 tarjetas oscuras con iconos Lucide (`message-square`, `zap`, `users`) destacando capacidades clave.
 
 ---
 
-# Primary Button
+# 4. Beneficios (`#beneficios`)
 
-## Uso
+Grid de 4 tarjetas visuales de alto impacto sobre lienzo claro.
 
-Acción principal.
-
-## Estados
-
-Default
-
-Hover
-
-Focus
-
-Disabled
-
-Loading
-
-## Reglas
-
-Solo un botón primario dominante por sección.
+### Elementos por Tarjeta:
+- **Contenedor:** Fondo oscuro `#0B0F19`, radio `rounded-3xl`, borde `border-slate-800/80` y efecto `.card-glow-hover`.
+- **Media Banner:** Imagen optimizada WebP en relación `4/3` con hover zoom suave (`group-hover:scale-105`):
+  - *Atención permanente:* `media/images/atencion-24-7.webp`
+  - *Optimización del tiempo:* `media/images/automatizacion.webp`
+  - *Integración:* `media/images/integracion.webp`
+  - *Escalabilidad:* `media/images/escalabilidad.webp`
+- **Línea de Acento Dinámica:** Barra indicadora que se expande y tiñe de cobalto al hacer hover (`group-hover:w-14 group-hover:bg-primary`).
+- **Título & Descripción:** Tipografía blanca con cambio de color en hover a `text-primary-light`.
 
 ---
 
-# Secondary Button
+# 5. Soluciones Inteligentes — 3D Showcase (`#soluciones`)
 
-## Uso
+Showcase unboxed con baraja interactiva de cartas 3D y selector de casos de uso.
 
-Acciones secundarias.
-
-No competir visualmente con el principal.
-
----
-
-# Ghost Button
-
-## Uso
-
-Acciones de baja prioridad.
-
----
-
-# Card
-
-## Uso
-
-Agrupar contenido.
-
-## Puede contener
-
-Icono
-
-Título
-
-Descripción
-
-CTA
-
-Imagen
-
-## Estados
-
-Default
-
-Hover
-
-Selected (si aplica)
+### Componentes:
+1. **Tabs Selector (`#sol-tabs-container`):** Pestañas de filtrado para 5 casos de uso:
+   - 01. Atención al Cliente
+   - 02. Ventas y Cotizaciones
+   - 03. Soporte TI y RRHH
+   - 04. Operaciones y Logística
+   - 05. Finanzas y Cobranza
+2. **Baraja de Cartas 3D (`.soluciones-card-perspective`):**
+   - Dos cartas en ciclo continuo (`#sol-card-1` y `#sol-card-2`).
+   - Estados `.is-front` (rotación `-1.5deg`, interactiva) e `.is-back` (rotación `+3deg`, fondo).
+   - Animaciones clave de pase de baraja (`anim-front-to-back-right`, `anim-front-to-back-left`, `anim-back-to-front`).
+3. **Botones de Navegación (`#sol-prev-btn`, `#sol-next-btn`):**
+   - Botones circulares `.soluciones-nav-btn` ubicados directamente debajo de la tarjeta.
+4. **Paneles de Contexto Empresarial:**
+   - *El reto que resuelve:* Tarjeta oscura con icono `target`.
+   - *Sistemas que integra:* Tags de herramientas (WhatsApp API, Hubspot, SAP, etc.).
+   - *Impacto de negocio:* Tarjeta en verde esmeralda (`bg-emerald-950/40 border-emerald-500/30`) con métricas porcentuales.
 
 ---
 
-# Feature Card
+# 6. Nuestro Diferencial — Pipeline Boutique (`#diferencial`)
 
-Especialización de Card.
+Comparativa interactiva de servicio boutique frente a plantillas genéricas sobre lienzo oscuro.
 
-Orientada a mostrar funcionalidades.
-
-Debe mantener la misma estructura base.
-
----
-
-# Integration Card
-
-Debe contener:
-
-Logo
-
-Nombre
-
-Descripción opcional
+### Elementos:
+- **Insignia Central "VS":** Medallón circular divisor entre ambas columnas.
+- **Columna Izquierda (Soluciones Genéricas):** Tarjeta oscura `#0B1120` con lista de limitaciones e iconos de cancelación.
+- **Columna Derecha (AIXA Boutique):** Tarjeta con borde cobalto y pipeline de 5 fases interactivas con línea de progreso animada (`.dif-step`, `.dif-line`, `.dif-dot`, `.dif-icon`):
+  1. *Diagnóstico* (Icono `search`)
+  2. *Aprende de tu empresa* (Icono `brain`)
+  3. *Implementación personalizada* (Icono `puzzle`)
+  4. *Capacitación* (Icono `users`)
+  5. *Optimización continua* (Icono `bar-chart-2`)
+- **Badge Inferior:** Mensaje de valor personalizado con icono de estrella.
 
 ---
 
-# Industry Card
+# 7. CTA Block (`#cta`)
 
-Debe contener:
+Módulo de conversión de alto contraste ubicado dentro del lienzo claro inferior.
 
-Icono
-
-Nombre
-
-Descripción corta
-
----
-
-# Timeline
-
-## Elementos
-
-Paso
-
-Título
-
-Descripción
-
-Conector
-
-## Reglas
-
-Orden cronológico.
-
-No utilizar más de seis pasos.
+### Elementos:
+- **Contenedor:** Tarjeta oscura curvada (`rounded-3xl bg-[#0B1120] border-white/10`) con sombras profundas y halos de luz radiales internos.
+- **Badge:** `Impulsa tu Empresa` con punto animado.
+- **Título H2:** Texto destacado con acento degradado.
+- **Botón de Conversión:** Botón primario grande con icono `message-circle` para apertura directa a WhatsApp.
 
 ---
 
-# Statistics Card
+# 8. Integraciones — Escenario Orbital (`#integraciones`)
 
-## Elementos
+Escenario orbital concéntrico con núcleo central AIXA Neón y tarjetas flotantes de herramientas tecnológicas.
 
-Número
-
-Título
-
-Descripción
-
-Indicador visual
-
----
-
-# Testimonial
-
-## Elementos
-
-Foto
-
-Nombre
-
-Cargo
-
-Empresa
-
-Comentario
+### Elementos:
+- **Anillos Orbitales:** `.integ-orbit-ring` y `.integ-orbit-ring-inner` con bordes punteados y resplandor tenue.
+- **Núcleo Central AIXA (`#integ-center-core`):** Módulo redondeado blanco con el isotipo `media/images/aixa-neon.webp` animado mediante resplandor neón pulsante (`.integ-neon-glow`).
+- **Tarjetas Flotantes Squircle (`.integ-card`):**
+  - Contenedores redondeados (`rounded-[28px] md:rounded-[32px]`) con fondos oscuros `#0B0F19`.
+  - Iconos y logos de herramientas (WhatsApp, SAP, HubSpot, Salesforce, Zendesk, PostgreSQL, Google Drive, Shopify, Slack, Jira, etc.).
+  - **Tooltip Dinámico (`.integ-card-tooltip`):** Etiqueta flotante oscura que revela el nombre de la plataforma al hacer hover.
+  - **Hover Effect:** Elevación a escala 1.15, borde cobalto `#0D50E8` y resplandor expandido.
 
 ---
 
-# CTA Block
+# 9. Footer Moderno (`.aixa-footer-modern`)
 
-## Objetivo
+Pie de página corporativo minimalista y ordenado sobre fondo `#050816`.
 
-Invitar a la conversión.
-
-## Elementos
-
-Título
-
-Descripción
-
-Botón principal
-
-Botón secundario (opcional)
+### Elementos:
+- **Logotipo AIXA:** Enlace directo al inicio.
+- **Botones Sociales (`.aixa-footer-social-btn`):**
+  - Botones cuadrados redondeados (`w-11 h-11 rounded-2xl`) con iconos vectoriales SVG para **LinkedIn** e **Instagram**.
+  - Efecto hover con fondo azul translúcido, borde `#60A5FA` y elevación.
+- **Enlaces de Navegación:** Acceso rápido horizontal a todas las secciones y correo oficial `info@aixa.com`.
+- **Copyright:** Indicador de derechos reservados año 2026.
 
 ---
 
-# Footer
+# 10. Catálogo de Botones y Badges
 
-## Elementos
-
-Logo
-
-Descripción
-
-Links
-
-Contacto
-
-Redes sociales
-
-Copyright
-
----
-
-# Icon
-
-Utilizar una única librería.
-
-Mantener tamaño consistente.
-
-No mezclar estilos Filled y Outline.
-
----
-
-# Imagen
-
-Las imágenes deben:
-
-Optimizarse.
-
-Tener alt descriptivo.
-
-No ser únicamente decorativas.
-
----
-
-# Reglas de reutilización
-
-Antes de crear un componente nuevo, verificar:
-
-¿Existe uno similar?
-
-¿Puede adaptarse?
-
-¿Mantiene consistencia?
-
-¿Reduce duplicación?
-
-Si la respuesta es sí, reutilizar.
-
----
-
-# Estados interactivos
-
-Todo componente interactivo debe contemplar:
-
-Default
-
-Hover
-
-Focus
-
-Active
-
-Disabled
-
-Loading (si aplica)
-
----
-
-# Responsive
-
-Todo componente debe diseñarse Mobile First.
-
-No crear versiones duplicadas.
-
-Adaptar mediante Tailwind.
-
----
-
-# Accesibilidad
-
-Todo componente debe cumplir:
-
-Contraste suficiente.
-
-Focus visible.
-
-Navegación por teclado.
-
-aria-label cuando sea necesario.
-
-Texto legible.
-
----
-
-# Reglas para la IA
-
-Antes de crear cualquier componente:
-
-1. Revisar si ya existe uno reutilizable.
-
-2. Mantener el mismo sistema de espaciado.
-
-3. Respetar el Design System.
-
-4. Adaptar la apariencia según las referencias visuales proporcionadas por el usuario.
-
-5. No modificar la estructura del componente sin una razón funcional.
-
-El objetivo es construir un sistema de componentes consistente, no una colección de elementos independientes.
+| Componente | Clase Principal | Propósito / Características |
+| :--- | :--- | :--- |
+| **Botón Primario** | `.btn-primary-aixa` | Acción principal de conversión. Gradiente cobalto, shimmer sweep y glow hover. |
+| **Botón Secundario** | `.btn-secondary-aixa` | Acción secundaria. Glassmorphism, borde translúcido y elevación suave. |
+| **Botón Moving Border** | `.btn-nav-moving-border` | CTA de la barra de navegación. Borde animado rotativo continuo con conic-gradient. |
+| **Botón Circular Nav** | `.soluciones-nav-btn` | Navegación de casos de uso (Anterior / Siguiente) con iconos flecha. |
+| **Pestaña Selector** | `.soluciones-tab-btn` | Botón de tab para filtrado de soluciones con estado `.active`. |
+| **Badge Estándar** | `.inline-flex ... rounded-full` | Píldora con indicador animado pulse (`w-2 h-2 rounded-full bg-primary`). |

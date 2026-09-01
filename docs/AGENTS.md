@@ -2,492 +2,128 @@
 
 # Prioridad de instrucciones
 
-Este documento define las reglas de desarrollo del proyecto.
+Este documento define las reglas técnicas y de desarrollo para el proyecto de la Landing Page de AIXA.
 
-Orden de prioridad:
+### Orden de Prioridad:
+1. **Solicitud actual del usuario.**
+2. **Referencias visuales y directrices proporcionadas por el usuario.**
+3. **Este documento (AGENTS.md).**
+4. **Resto de la documentación técnica (`DESIGN_SYSTEM.md`, `UI_COMPONENTS.md`, `PROJECT_CONTEXT.md`).**
 
-1. Solicitud actual del usuario.
-2. Referencias visuales proporcionadas por el usuario.
-3. Este documento.
-4. Resto de la documentación.
-
-Las referencias visuales podrán modificar la apariencia del proyecto, pero nunca deberán comprometer la calidad del código, el rendimiento, la accesibilidad o la reutilización de componentes.
-
----
-
-# Iconografía
-
-La única librería de iconos permitida en el proyecto será Lucide Icons.
+Las decisiones de implementación deben priorizar la coherencia visual, la experiencia de usuario premium, el alto rendimiento y la mantenibilidad del código.
 
 ---
 
-# Reglas generales del proyecto
+# Stack Tecnológico
 
-Estas instrucciones tienen prioridad sobre cualquier sugerencia generada por la IA.
+El proyecto está construido sin dependencias complejas ni frameworks pesados para garantizar máxima velocidad de carga e interactividad fluida:
 
-El objetivo es mantener un código limpio, consistente, reutilizable, escalable y fácil de mantener durante todo el desarrollo de la Landing Page de AIXA.
-
-Si existe alguna duda entre varias implementaciones posibles, siempre se deberá elegir la alternativa más simple, legible y eficiente.
-
----
-
-# Stack tecnológico
-
-Utilizar únicamente:
-
-- HTML5
-- Tailwind CSS
-- JavaScript Vanilla
-
-No utilizar:
-
-- React
-- Vue
-- Angular
-- Alpine.js
-- jQuery
-- Bootstrap
-- Frameworks CSS adicionales
+- **HTML5:** Estructura semántica, accesible y limpia.
+- **Tailwind CSS (CDN):** Utilidades de diseño con configuración de temas y colores corporativos.
+- **CSS3 Vanilla (`styles.css`):** Variables raíz, animaciones complejas, keyframes, diseño de tarjetas 3D, linterna interactiva y efectos de resplandor.
+- **JavaScript Vanilla (`main.js`):** Lógica modular de componentes interactivos, animaciones por scroll/evento, simulación de chat dinámico, carruseles y órbitas.
+- **Iconografía:** **Lucide Icons** exclusivamente vía CDN (`https://unpkg.com/lucide@latest`).
+- **Tipografía:** **Fredoka** (`media/fonts/`), cargada localmente mediante `@font-face`.
 
 ---
 
-# Estructura del proyecto
+# Estructura del Proyecto
 
-La landing estará compuesta por un único archivo HTML.
+El proyecto está organizado de forma modular y desacoplada:
 
-No crear múltiples páginas.
-
-No dividir el proyecto en componentes físicos.
-
-Toda la estructura deberá mantenerse organizada mediante comentarios claramente identificados.
-
-Ejemplo:
-
-<!-- ========================================= -->
-<!-- HERO -->
-<!-- ========================================= -->
-
----
-
-# HTML
-
-Priorizar HTML limpio y semántico.
-
-Utilizar únicamente etiquetas semánticas cuando realmente aporten significado:
-
-header
-
-main
-
-section
-
-nav
-
-footer
-
-article
-
-Evitar divs innecesarios.
-
-No crear niveles de anidación excesivos.
-
-Mantener la estructura lo más plana posible.
+```text
+langin-page-aixa/
+├── index.html              # Estructura principal y maquetación de secciones
+├── styles.css              # Variables CSS, diseño de componentes, efectos glow, animaciones y responsive
+├── main.js                 # Lógica e interactividad de todos los módulos de la landing
+├── favicon.ico             # Favicon del sitio web
+├── README.md               # Resumen del proyecto
+├── docs/                   # Documentación oficial del proyecto
+│   ├── AGENTS.md           # Reglas técnicas de desarrollo y agentes
+│   ├── DESIGN_SYSTEM.md    # Sistema de diseño, tokens, tipografía y colores
+│   ├── UI_COMPONENTS.md    # Catálogo detallado de componentes UI
+│   └── PROJECT_CONTEXT.md  # Contexto de negocio y propuesta de valor
+└── media/                  # Recursos gráficos locales
+    ├── fonts/              # Archivos de tipografía local (Fredoka TTF)
+    └── images/             # Logotipos SVG y recursos optimizados WebP
+```
 
 ---
 
-# Tailwind CSS
+# Reglas de HTML
 
-Todo el diseño deberá realizarse utilizando Tailwind CSS.
-
-No crear hojas CSS externas.
-
-Todo el CSS personalizado deberá escribirse exclusivamente dentro de:
-
-<style>
-
-...
-
-</style>
-
-No utilizar atributos `style=""` inline para aplicar estilos visuales estáticos.
-Todos los estilos estáticos deben asignarse mediante clases de Tailwind CSS o dentro del bloque `<style>`.
-
-**Excepción:** Los atributos `style=""` están permitidos **únicamente** para propiedades de diagramación, posicionamiento dinámico (coordenadas en diagramas) o variables dinámicas manejadas por JavaScript (ej: `--dx`, `top`, `left`).
-
-No sobrescribir clases de Tailwind salvo cuando sea estrictamente necesario.
-
-Priorizar siempre las utilidades nativas de Tailwind.
+- **Semántica:** Utilizar etiquetas semánticas (`header`, `nav`, `main`, `section`, `article`, `footer`).
+- **Encabezados:** Único `<h1>` en el Hero. Todas las secciones principales usan `<h2>`. Títulos de tarjetas y bloques usan `<h3>`.
+- **Estructura Organizada:** Delimitar claramente las secciones con bloques de comentarios estandarizados:
+  ```html
+  <!-- ========================================= -->
+  <!-- NOMBRE DE SECCIÓN -->
+  <!-- ========================================= -->
+  ```
+- **Atributos de Imagen:** Todas las etiquetas `<img>` deben incluir `alt` descriptivo y atributos de optimización como `loading="lazy"` y `decoding="async"` (salvo en el Hero para evitar retrasos en el LCP).
+- **Atributos Accesibles:** Los botones sin texto visible deben contar con `aria-label` descriptivo.
 
 ---
 
-# CSS personalizado
+# Reglas de CSS (`styles.css`)
 
-Crear CSS únicamente para:
-
-Variables
-
-Animaciones
-
-Keyframes
-
-Gradientes personalizados
-
-Glow
-
-Glassmorphism
-
-Componentes imposibles de construir únicamente con Tailwind
-
-No utilizar CSS para reemplazar utilidades de Tailwind.
+- **Variables Centralizadas:** Todas las variables globales (colores, coordenadas de linterna, fuentes) residen en `:root`.
+- **Estilos Estáticos vs Clases:** Priorizar clases de Tailwind CSS para espaciados, tamaños y flexbox/grid.
+- **CSS Personalizado Específico:** Escribir en `styles.css` únicamente:
+  - Definición de `@font-face`.
+  - Animaciones, `@keyframes` y transiciones 3D (`perspective`, `transform-style`).
+  - Efectos visuales de resplandor (`box-shadow`, `drop-shadow`, pseudo-elementos `::before` y `::after`).
+  - Lógica de la linterna interactiva (`--mouse-x`, `--mouse-y`, `--flashlight-opacity`).
+  - Estilos de tarjetas complejas (`sol-deck-card`, `integ-card`, `btn-nav-moving-border`).
+- **Consistencia en Hover:** Toda tarjeta o botón interactivo debe contar con transiciones suaves (`cubic-bezier(0.16, 1, 0.3, 1)` o `ease-out`).
 
 ---
 
-# JavaScript
+# Reglas de JavaScript (`main.js`)
 
-Todo el JavaScript deberá permanecer dentro del mismo archivo HTML.
-
-Ubicar siempre el script antes del cierre del body.
-
-No utilizar librerías externas.
-
-No utilizar dependencias innecesarias.
-
-Utilizar funciones pequeñas.
-
-Evitar variables globales.
-
-Priorizar:
-
-const
-
-let
-
-Funciones reutilizables
-
-Código modular mediante funciones.
+- **Inicialización Centralizada:** Todas las funciones de módulos se registran en el evento `DOMContentLoaded`:
+  ```javascript
+  document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      initGlobalFlashlight();
+      initNavbar();
+      initConversationDemo();
+      initQueEsAixa();
+      initSolucionesShowcase();
+      initDiferencial();
+      initIntegraciones();
+  });
+  ```
+- **Modularidad e Inmutabilidad:** Funciones pequeñas, descriptivas y de responsabilidad única. Usar `const` y `let`, evitando variables globales contaminantes.
+- **Rendimiento de Animaciones:** Para seguimiento de puntero o scroll, utilizar `requestAnimationFrame` o `IntersectionObserver`.
+- **Re-renderizado de Iconos:** Al inyectar HTML dinámicamente con JavaScript que contenga iconos Lucide, invocar siempre `lucide.createIcons()` para procesar los nuevos elementos.
 
 ---
 
-# Responsive
+# Diseño Responsive (Mobile First)
 
-Aplicar enfoque Mobile First.
-
-Utilizar exclusivamente los breakpoints oficiales de Tailwind.
-
-No duplicar componentes para desktop y mobile.
-
-El mismo componente deberá adaptarse mediante clases responsive.
-
----
-
-# Componentes
-
-Todo elemento repetitivo deberá construirse como un componente reutilizable mediante HTML consistente.
-
-Ejemplos:
-
-Botones
-
-Cards
-
-Badges
-
-Etiquetas
-
-Secciones
-
-Timeline
-
-Feature Cards
-
-CTA
-
-No copiar código repetido innecesariamente.
+- **Breakpoints Estándar:**
+  - `sm:` (640px)
+  - `md:` (768px)
+  - `lg:` (1024px)
+  - `xl:` (1280px)
+- **No duplicar DOM:** El mismo componente HTML debe adaptarse mediante clases responsive de Tailwind y CSS sin duplicar código para móvil y escritorio.
+- **Contenedores Máximos:** `max-w-7xl mx-auto px-6 lg:px-12`.
+- **Pading Lateral:** Mínimo `px-6` en móviles y `px-12` en pantallas grandes para evitar que el contenido toque los bordes.
 
 ---
 
-# Sistema visual
+# Rendimiento y Optimización
 
-Mantener consistencia en:
-
-Espaciados
-
-Bordes
-
-Sombras
-
-Gradientes
-
-Iconografía
-
-Tipografía
-
-Radios
-
-Glow
-
-Las secciones de la página deben alternar entre fondos oscuros y claros (empezando por el hero en oscuro), para evitar que el sitio se sienta demasiado oscuro.
-Todos los títulos (H1-H6) deben usar fuente en peso Medium (font-medium).
-
-No crear estilos diferentes para elementos equivalentes.
+- **Carga de Recursos:** Priorizar formatos modernos WebP para imágenes y SVG para logotipos vectoriales.
+- **Tipografía Local:** Las fuentes cargadas desde `media/fonts/` incluyen `font-display: swap` para eliminar bloqueos de renderizado.
+- **Control de Reflows:** Utilizar `will-change: transform, opacity` únicamente en elementos animados intensivos (como tarjetas de soluciones y escenario orbital).
 
 ---
 
-# Diseño
-
-La interfaz debe transmitir:
-
-Tecnología
-
-Confianza
-
-Elegancia
-
-Minimalismo
-
-Profesionalismo
-
-No debe sentirse experimental.
-
-Debe parecer una empresa consolidada.
-
----
-
-# Estilo gráfico
-
-Inspirarse visualmente en empresas como:
-
-OpenAI
-
-Anthropic
-
-Vercel
-
-Linear
-
-Stripe
-
-Notion AI
-
-No copiar diseños.
-
-Únicamente tomar inspiración estética.
-
----
-
-# Inteligencia Artificial
-
-Representar la IA mediante recursos abstractos como:
-
-Gradientes
-
-Glow
-
-Patrones geométricos
-
-Redes neuronales
-
-Conexiones
-
-Mesh gradients
-
-Líneas
-
-Partículas
-
-Glassmorphism ligero
-
-Evitar:
-
-Robots
-
-Cerebros digitales
-
-Androides
-
-Circuitos exagerados
-
-Iconografía cliché de IA
-
----
-
-# Animaciones
-
-Las animaciones deben ser elegantes y discretas.
-
-Priorizar:
-
-Fade
-
-Opacity
-
-Translate
-
-Blur
-
-Scale
-
-Glow
-
-Hover
-
-Evitar:
-
-Bounce
-
-Rotate continuos
-
-Animaciones invasivas
-
-Elementos distractores
-
-Duración recomendada:
-
-300 ms a 700 ms
-
----
-
-# Rendimiento
-
-Priorizar rendimiento antes que efectos visuales.
-
-Evitar:
-
-DOM innecesario
-
-Animaciones pesadas
-
-Filtros costosos
-
-JavaScript innecesario
-
-Reducir al mínimo la cantidad de nodos HTML.
-
----
-
-# Accesibilidad
-
-Utilizar:
-
-aria-label
-
-alt
-
-Contraste suficiente
-
-Jerarquía correcta de encabezados
-
-Estados visibles de focus
-
-Botones accesibles
-
----
-
-# SEO
-
-Mantener buenas prácticas SEO.
-
-Utilizar:
-
-title
-
-meta description
-
-Open Graph
-
-Jerarquía H1-H2-H3
-
-Texto indexable
-
-Imágenes optimizadas
-
-Alt descriptivos
-
----
-
-# Calidad del código
-
-Todo código generado debe cumplir:
-
-Legible
-
-Ordenado
-
-Comentado por secciones
-
-Sin código muerto
-
-Sin clases sin utilizar
-
-Sin estilos duplicados
-
-Sin JavaScript innecesario
-
----
-
-# Convención de comentarios
-
-Separar cada bloque mediante comentarios claros.
-
-Ejemplo:
-
-<!-- ========================================= -->
-<!-- HERO -->
-<!-- ========================================= -->
-
-<!-- ========================================= -->
-<!-- BENEFICIOS -->
-<!-- ========================================= -->
-
-<!-- ========================================= -->
-<!-- CTA -->
-<!-- ========================================= -->
-
----
-
-# Metodología de desarrollo
-
-Desarrollar siempre por etapas.
-
-Nunca construir toda la landing en una sola respuesta.
-
-Cada solicitud deberá enfocarse en una única sección o componente.
-
-Antes de crear nuevos estilos, verificar si ya existe un componente reutilizable.
-
-Si una propuesta afecta la consistencia del proyecto, priorizar la coherencia visual sobre la creatividad.
-
----
-
-# Flujo de trabajo obligatorio
-
-Antes de construir una nueva sección:
-
-1. Analizar el contexto del proyecto.
-2. Reutilizar componentes existentes.
-3. Mantener consistencia visual.
-4. Evitar duplicación de código.
-5. Validar responsive.
-6. Optimizar el HTML.
-7. Optimizar el rendimiento.
-8. Mantener coherencia con el resto de la landing.
-
-Nunca generar una sección aislada sin considerar el diseño global de toda la página.
-
----
-
-# Prioridad de decisiones
-
-En caso de existir varias alternativas, siempre priorizar:
-
-1. Simplicidad
-2. Legibilidad
-3. Reutilización
-4. Rendimiento
-5. Accesibilidad
-6. Responsive
-7. Estética
-8. Animaciones
-
-La calidad del código tiene prioridad sobre la cantidad de efectos visuales.
-
+# Metodología de Modificación y Trabajo
+
+1. **Revisar Contexto:** Verificar siempre `DESIGN_SYSTEM.md` y `UI_COMPONENTS.md` antes de crear nuevos componentes o alterar estilos.
+2. **Reutilizar Componentes:** No crear variantes innecesarias de botones, badges o tarjetas si una clase existente puede resolver la necesidad.
+3. **Validar Consistencia:** Asegurarse de que el peso tipográfico de los títulos se mantenga en `Medium` (`font-medium`), que los bordes respeten el sistema de glow cobalto y que la alternancia de lienzos permanezca armónica.
+4. **Verificación Visual:** Validar cambios en vista móvil, tablet y escritorio.
