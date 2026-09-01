@@ -1187,15 +1187,15 @@
         // INTEGRACIONES CIRCULAR ORBIT ANIMATION
         // =========================================
         const integracionesData = [
-            { id: "whatsapp", name: "WhatsApp Business", img: "media/images/whatsapp-bussiness.png" },
-            { id: "crm", name: "CRM", img: "media/images/crm.png" },
-            { id: "erp", name: "ERP", img: "media/images/erp.png" },
-            { id: "calendar", name: "Google Calendar", img: "media/images/google-calendar.png" },
-            { id: "m365", name: "Microsoft 365", img: "media/images/Microsoft-365.png" },
-            { id: "email", name: "Correo Electrónico", img: "media/images/correo-electronico.png" },
-            { id: "db", name: "Bases de Datos", img: "media/images/base-de-datos.png" },
-            { id: "api", name: "APIs", img: "media/images/api.png" },
-            { id: "sistemas", name: "Sistemas Empresariales", img: "media/images/sistemas-empresariales.png" }
+            { id: "whatsapp", name: "WhatsApp Business", img: "media/images/whatsapp-bussiness.webp" },
+            { id: "crm", name: "CRM", img: "media/images/crm.webp" },
+            { id: "erp", name: "ERP", img: "media/images/erp.webp" },
+            { id: "calendar", name: "Google Calendar", img: "media/images/google-calendar.webp" },
+            { id: "m365", name: "Microsoft 365", img: "media/images/Microsoft-365.webp" },
+            { id: "email", name: "Correo Electrónico", img: "media/images/correo-electronico.webp" },
+            { id: "db", name: "Bases de Datos", img: "media/images/base-de-datos.webp" },
+            { id: "api", name: "APIs", img: "media/images/api.webp" },
+            { id: "sistemas", name: "Sistemas Empresariales", img: "media/images/sistemas-empresariales.webp" }
         ];
 
         function initIntegraciones() {
